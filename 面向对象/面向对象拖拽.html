@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象的拖拽</title>
+	<style>
+		#div1 { width: 100px; height: 100px; background-color: red;position: absolute; }
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+<script>
+	/*window.onload = function(){
+		var oDiv1 = document.getElementById("div1");
+		var disX = 0;
+		var disY = 0;
+		oDiv1.onmousedown = function(ev){			
+			var ev = ev || window.event;
+			disX = ev.clientX - oDiv1.offsetLeft;
+			disY = ev.clientY - oDiv1.offsetTop;
+
+			document.onmouseover = function(ev){			
+				var ev = ev || window.event;
+				oDiv1.style.left = ev.clientX - disX + "px";
+				oDiv1.style.top = ev.clientY - disY + "px";
+			}
+
+			document.onmouseup = function(){
+				document.onmouseover = null;
+				document.onmouseup = null;
+			}
+			return false;
+		}
+	}*/
+	//先变形
+	/*var oDiv1 = null;
+	var disX = 0;
+	var disY = 0;
+	window.onload = function(){
+		oDiv1 = document.getElementById("div1");
+		init();
+	}
+
+	function init(){
+		oDiv1.onmousedown = fnMousedown;
+	}
+
+	function fnMousedown(ev){
+		var ev = ev || window.event;
+		disX = ev.clientX - oDiv1.offsetLeft;
+		disY = ev.clientY - oDiv1.offsetTop;
+
+		document.onmouseover = fnMouseover;
+
+		document.onmouseup = fnMouseup;
+		return false;
+	}
+
+	function fnMouseover(ev){
+		var ev = ev || window.event;
+		oDiv1.style.left = ev.clientX - disX + "px";
+		oDiv1.style.top = ev.clientY - disY + "px";
+	}
+
+	function fnMouseup(){
+		document.onmouseover = null;
+		document.onmouseup = null;		
+	}*/
+
+	// 面向对象方法
+	window.onload = function(){
+		var drag = new Fndrag('div1');
+		drag.init();
+	}
+
+	function Fndrag(id){
+		this.oDiv = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+	}
+
+	Fndrag.prototype.init = function(){
+		var This = this;
+		this.oDiv.onmousedown = function(ev){
+			var ev = ev || window.event;
+			This.fnmousedown(ev);
+			return false;
+		};
+	}
+
+	Fndrag.prototype.fnmousedown = function(ev){
+		var This = this;
+		this.disX = ev.clientX - this.oDiv.offsetLeft;
+		this.disY = ev.clientY - this.oDiv.offsetTop;
+
+		document.onmouseover = function(ev){
+			var ev = ev || window.event;
+			This.fnMouseover(ev);
+		}
+
+		document.onmouseup = this.fnMouseup;
+	}
+
+	Fndrag.prototype.fnMouseover = function(ev){
+		this.oDiv.style.left = ev.clientX - this.disX + "px";
+		this.oDiv.style.top = ev.clientY - this.disY + "px";
+	}
+
+	Fndrag.prototype.fnMouseup = function(){
+		document.onmouseover = null;
+		document.onmouseup = null;	
+	}
+	
+</script>
+</html>

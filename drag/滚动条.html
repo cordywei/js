@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动条模拟及扩展</title>
+
+	<style>
+		#div1 { width:30px;height:500px;background-color: black;position: absolute; }
+		#div2 { width:30px;height:30px;background-color: yellow;position: absolute; }
+		#div3 { width: 300px;height:498px;border:1px solid blue;background-color: pink;position: absolute;left: 40px;overflow: hidden; }
+		#div4 { position: absolute;word-break:break-word; }
+	</style>
+
+
+</head>
+<body>
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+	<div id="div3">
+		<div id="div4">
+			uewhjdhfjdshfjshhudsfhudsfudhfjdshfjdhfjsdhjfsdhjdshfjdhfjdshfjdhjhjdhjfdhjfhdjfhdjhfjdhfjdhfjdhfjdshfjdshjfdhjfhdjhfjdshfjdshfjsdhfjdshfjdhfjhdjfhdjfhjdshfjdhfjdshfjdshfjsdhfjdshfjshfjdshfjdshfjdshfjdshfjdshfjdshfjdhsjfhdsjhfjshjshfjshfjfhjsdhjfhjdshfdfuweuwe
+			uewhjdhfjdshfjshhudsfhudsfudhfjdshfjdhfjsdhjfsdhjdshfjdhfjdshfjdhjhjdhjfdhjfhdjfhdjhfjdhfjdhfjdhfjdshfjdshjfdhjfhdjhfjdshfjdshfjsdhfjdshfjdhfjhdjfhdjfhjdshfjdhfjdshfjdshfjsdhfjdshfjshfjdshfjdshfjdshfjdshfjdshfjdshfjdhsjfhdsjhfjshjshfjshfjfhjsdhjfhjdshfdfuweuwe
+			uewhjdhfjdshfjshhudsfhudsfudhfjdshfjdhfjsdhjfsdhjdshfjdhfjdshfjdhjhjdhjfdhjfhdjfhdjhfjdhfjdhfjdhfjdshfjdshjfdhjfhdjhfjdshfjdshfjsdhfjdshfjdhfjhdjfhdjfhjdshfjdhfjdshfjdshfjsdhfjdshfjshfjdshfjdshfjdshfjdshfjdshfjdshfjdhsjfhdsjhfjshjshfjshfjfhjsdhjfhjdshfdfuweuwe
+			uewhjdhfjdshfjshhudsfhudsfudhfjdshfjdhfjsdhjfsdhjdshfjdhfjdshfjdhjhjdhjfdhjfhdjfhdjhfjdhfjdhfjdhfjdshfjdshjfdhjfhdjhfjdshfjdshfjsdhfjdshfjdhfjhdjfhdjfhjdshfjdhfjdshfjdshfjsdhfjdshfjshfjdshfjdshfjdshfjdshfjdshfjdshfjdhsjfhdsjhfjshjshfjshfjfhjsdhjfhjdshfdfuweuwe
+			uewhjdhfjdshfjshhudsfhudsfudhfjdshfjdhfjsdhjfsdhjdshfjdhfjdshfjdhjhjdhjfdhjfhdjfhdjhfjdhfjdhfjdhfjdshfjdshjfdhjfhdjhfjdshfjdshfjsdhfjdshfjdhfjhdjfhdjfhjdshfjdhfjdshfjdshfjsdhfjdshfjshfjdshfjdshfjdshfjdshfjdshfjdshfjdhsjfhdsjhfjshjshfjshfjfhjsdhjfhjdshfdfuweuwe结束了结束了结束了
+		</div>
+	</div>
+</body>
+<script>
+	window.onload = function(){
+		var oDiv1 = document.getElementById("div1");
+		var oDiv2 = document.getElementById("div2");
+		var oDiv3 = document.getElementById("div3");
+		var oDiv4 = document.getElementById("div4");
+		var iMaxTop = oDiv1.offsetHeight - oDiv2.offsetHeight; 
+
+		oDiv2.onmousedown = function(ev){
+			var ev = ev || event;
+			var disY = ev.clientY - this.offsetTop;
+
+			document.onmousemove = function(ev){
+				var ev = ev || event;
+				var T = ev.clientY - disY;
+				if(T < 0){
+					T = 0
+				}else if(T > iMaxTop){
+					T = iMaxTop;
+				}
+
+				oDiv2.style.top = T + "px";
+
+				// var iScale = T / iMaxTop;
+				var iScale = T / iMaxTop;
+
+				// oDiv3.style.height = iScale * 500 + "px";
+				oDiv4.style.top = -iScale * ( oDiv4.offsetHeight - oDiv3.offsetHeight ) + "px";
+			}
+
+			document.onmouseup = function(){
+				document.onmousemove = document.onmouseup = null;
+			}
+
+			return false;
+
+
+
+		}
+	}
+</script>
+</html>

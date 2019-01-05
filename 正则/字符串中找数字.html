@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串中找数字</title>
+</head>
+<body>
+
+</body>
+<script>
+	//传统方式
+	/*var str = "hajdj123khkdhfska234ks2k2j111kj987";
+	function findNum(str){
+
+		var arr = [];
+		var tmp = "";
+		for(var i = 0; i < str.length; i++){
+			if(str.charAt(i) <= "9" && str.charAt(i) >= "0"){
+				// arr.push(str.charAt(i));
+				tmp += str.charAt(i);
+			}else{
+				if(tmp){
+					arr.push(tmp);
+					tmp = "";
+				}
+			}
+		};
+
+		if(tmp){
+			arr.push(tmp);
+			tmp = "";
+		};
+
+		return arr;
+
+	};
+	alert(findNum(str));*/
+
+	//正则表达式
+	var str = "hajdj123khkdhfska234ks2k2j111kj987";
+	function findNum(str){
+		return str.match(/\d+/g);
+	}
+
+	alert(findNum(str));
+
+
+
+</script>
+</html>

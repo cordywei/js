@@ -1,0 +1,78 @@
+/* 样式重置 */
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,form,input,textarea,th,td,select{ margin:0;padding:0; }
+em{ font-style: normal }
+li{ list-style: none; }
+a{ text-decoration: none; }
+img{ border:none;vertical-align: top; }
+table{ border-collapse: collapse; }
+input,textarea{ outline: none; }
+textarea{ resize: none;overflow: auto; }
+body{ font-size: 12px;font-family: "微软雅黑"; }
+
+
+
+/* common style */
+.fl{ float:left; }
+.fr{ float:right; }
+.clear{ zoom:1; }
+.clear:after{ content:""; display:block;clear:both;}
+.gradient{ 
+	background: -moz-linear-gradient(top,#fff,#f8f8f8);
+	background: -webkit-linear-gradient(top,#fff,#f8f8f8);
+	background: -ms-linear-gradient(top,#fff,#f8f8f8);
+	background: linear-gradient(top,#fff,#f8f8f8);
+	-ms-filter:"progrid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff,endColor=#f8f8f8)"; /*兼容ie9*/
+	+background: #f9f9f9;  /*hacker兼容IE67*/
+	 }
+
+/* layout */
+.header{ width: 960px;height: 30px;margin: 0 auto;border-radius: 0 0 6px 6px; }
+.nav{ width: 960px;height:100px;margin:0 auto; }
+.search{ width: 958px;height: 114px;margin:0 auto 10px;border: 1px solid #dbdbdb;border-radius: 6px; }
+.content{ width: 960px;margin: 0 auto; }
+.main{ width: 710px; }
+.section{ width: 318px;padding:0 15px;border: 1px solid #dbdbdb;border-radius: 6px;margin-bottom: 10px; }
+.option{ width: 350px; }
+.main_ad{ width: 700px;margin-bottom: 10px;border-radius: 6px;overflow: hidden;}
+.main_ad a{ display:block;width: 100%; }
+.main_ad a img{ display:block;width: 100%; }
+.side{ width: 240px; }
+.side_section{ border: 1px solid #dbdbdb;border-radius: 6px;margin-bottom: 10px;padding: 0 12px; }
+.side_ad{ border-radius: 6px;overflow: hidden;margin-bottom: 10px; }
+.side_ad a{ display: block; }
+.side_ad a img{ width: 100%; }
+.footer{ width: 958px;height: 78px;margin: 0 auto;background: #f9f9f9; }
+
+.option .option_nav{ height: 34px; }
+.option .option_nav li{ width: 172px;height: 33px;line-height:33px;border: 1px solid #dbdbdb;border-bottom: none;border-radius: 6px 6px 0 0;text-align: center;}
+.option .option_nav .active{  }
+.option .con{ width: 348px;border: 1px solid #dbdbdb;border-radius: 0 0 6px 6px;border-top: none; }
+
+
+.header .city{ float: left;line-height: 30px;padding-left: 20px; }
+.header .city a{ height:18px;line-height: 18px; display: inline-block;  border: 1px solid #e5e5e5;border-radius: 2px; box-shadow:1px 1px 0 #ededed ; text-align: center;}
+.header .city a:hover{  }
+.header .link{ float: right;line-height: 30px;padding-right: 20px;word-spacing: 4px;color:#d5d5d5; }
+.header .link a{ color:#666; }
+.header .link a:hover{ text-decoration: underline; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

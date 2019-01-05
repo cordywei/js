@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	替换前<br>
+	<textarea id="w1"></textarea><br>
+	替换后<br>
+	<textarea id="w2"></textarea><br>
+	<input type="button" value="确定" id="btn">
+	<br>
+	<br>
+	<br>
+	判断qq号<input type="text" id="qq"><input type="button" value="确定" id="btn2">
+</body>
+<script>
+	/*var arr = [];
+	var arr = new Array();
+
+	var obj = {};
+	var obj = new Object();
+
+	//正则
+	var re = /a/;   
+	//简写方式的性能比下面这种全称的写法好，但有一种特殊情况必须用全称写。
+	//单独两条斜杠的简写计算机会认为是注释，所以里面应该个a或其他
+	var re = new RegExp('a');*/
+
+	/////////////////////
+	//test:正则去匹配字符串，如果匹配成功就返回真，失败返回假
+	//test的写法：正则.test(字符串)
+	var str = 'abcdef';
+	var re = /b/;
+	alert(re.test(str));   //true
+
+
+	//转义字符：这个字符本身是一个意思，加上反斜杠之后是另外一个意思
+	//alert('anb')与alert('a\nb')
+	//\s:空格
+	//\S：非空格
+	//\d:数字
+	//\D：非数字
+	//\w:字符 （字母，数字，下划线_）
+	//\W：非字符
+	// . ：在正则中代表任意字符
+	// \. ：代表真正的点
+	// \b：独立的部分（起始，结束，空格）
+	// \B：非独立部分
+	var str = '676767jh87878';
+	//var re = /\d+/g;
+	var re = /\D+/g;
+	//var re = /\d+/g;
+	if(re.test(str)){
+		alert("不全是数字");
+	}else{
+		alert("全是数字");
+	}
+
+	var string1 = 'onetwo';
+	// var  re = /\bone/;
+	var  re = /one\b/;
+	alert(re.test(string1));  //false
+
+
+	////////////////////
+	//search:正则去匹配字符串，若匹配成功，就返回匹配成功的位置，若匹配失败就返回-1
+	//search的写法：字符串.search(正则)
+	//
+	//正则中的默认是区分大小写的
+	//如果不区分大小写的话在斜杠的后面价标识i
+	var str = 'abcdef';
+	//var re = /bc/;
+	var re = /B/i;   //var re = new RegExp('B','i');
+	alert(str.search(re));  //1
+
+
+	////////////////////////////
+	//match:正则去匹配字符串，若匹配成功，返回匹配成功的数组，失败则返回空
+	//match的写法，字符串.match(正则)
+	//正则中的默认行为：正则匹配成功就会结束，不会就继续匹配；若想全部查找就要加标识g(全局匹配)
+	var  str = "hjsj132hdhkshdkh2367267hj32";
+	var re = /\d+/g;
+	alert(str.match(re));
+
+
+	var str = "abc";
+	var re = /(a)(b)(c)/;
+	alert(str.match(re));  //[abc,a,b,c](当match不加g的时候才可以获得子项的集合)
+
+
+	//////////////////////////
+	//replace: 正则去匹配字符串，匹配成功的字符去替换成新的字符串
+	//replace的写法：字符串.replace(正则，新的字符串)
+	var str = 'aaa';
+	var re = /a/g;
+	str = str.replace(re,'b');
+
+
+	//////////////////////
+	//   |:在正则中是或的意思
+	//   replace: 第二个参数，可以使字符串，也可以是一个回调函数
+	window.onload = function(){
+		var oBtn = document.getElementById("btn");
+		var oW1 = document.getElementById("w1");
+		var oW2 = document.getElementById("w2");
+		var re = /中国|你|我/g;
+		oBtn.onclick = function(){
+			var value1 = oW1.value;
+			if(value1){
+				if(re.test(value1)){
+					// var a = value1.replace(re,"**");
+					var a = value1.replace(re,function(str){
+						//函数的第一个参数：就是匹配成功的字符
+						console.log(str.length);
+						var num = "";
+						// var arr = [];
+						for(var i = 0; i < str.length; i++){
+							num += "*";
+						}
+						// arr.push(num);
+						// return arr;
+						return num;
+					});
+					oW2.value = a;
+				}
+			}
+		}
+
+
+
+
+		///////////////////////////
+		//匹配子项：小括号()  (还有另外一个意思，分组操作)
+		//把正则的整体叫做（母亲）
+		//把左边第一个小括号里面的正则，叫做这个第一个子项（母亲的第一个孩子），第二个小括号就是第二个孩子
+		// var str = '2013-3-3';
+		/*var re = /(\d+)(-)/g;
+		oBtn.onclick = function(){
+
+			oW2.value = oW1.value.replace(re,function(str1,str2,str3){
+				//第一个参数：str1(母亲)，第二个参数：str2(第一个孩子)，第三个参数：str3（第二个孩子）
+				str3 = ".";
+				// var a = str2 + ".";
+				var a = str2 + str3;
+				return a;
+
+			})
+		}*/
+
+
+
+
+		//////////////////////////////
+		// var  re2 = /<[^>]+>/g;
+		var re2 = /<[\w\W]+>/g;   //中括号里面的是或的意思
+		oBtn.onclick = function(){
+
+			oW2.value = oW1.value.replace(re2,'');
+		}
+
+
+
+		
+		/////////////////////////
+		//字符类:一组相似的元素    []中括号的整体代表一个字符
+		/*var str = 'abcd';
+		var re = /a[bde]c/;
+		alert(re.test(str));*/
+
+
+		////////////////////////
+		//排除：^如果^写在[]里面的话，就代表排除的意思
+		/*var str = 'abc';
+		var re = /a[^bde]c/;
+		alert(re.test(str));*/
+
+		////////////////////////////
+		//范围：中括号中的-表示范围，必须按顺序有小到大写，
+		
+
+
+
+
+		/////////////////////
+		//量词：{}
+		//{4,}至少出现4次
+		//{4}正好出现4次
+		//{4,8}前面的字符至少出现4次，最多出现8次
+		//+ == {1,}
+		//? == {0,1}   出现0次或1次
+		//* == {0,}  
+		//
+		//^:正则的最开始位置，就代表起始，若放在中括号里面则表示 非
+		//$:正则的最后位置，表示结束
+		var oBtn2 = document.getElementById("btn2"); 
+		var re3 = /^[1-9]\d{4,11}$/;
+		oBtn2.onclick = function(){
+			var oQq = document.getElementById("qq");
+			if(re3.test(oQq.value)){
+				alert("输入qq正确");
+			}else{
+				alert("输入错误");
+			}
+		}
+
+
+
+
+
+		///////////////////////
+		///去前后空格
+		var str = ' hello ';
+		console.log('('+str+')');
+		var re4 = /^\s+|\s+$/g;
+		str = str.replace(re4,"");
+		console.log('('+str+')');
+
+	}
+
+
+	/////////////////////
+	//正则中的重复子项
+	//\1:重复的第一个子项
+	//\2:重复的第二个子项
+	//\3:重复的第四个子项
+	//
+	/*var re = /\w\w/;  //可以匹配c9,cc,99
+	var re = /(\w)\1/; //只能匹配存储，99*/
+
+	var str = "sssshjdhkjshuuuuuuuuuuuusjdhajs";
+	var arr = str.split('');
+	str = arr.sort().join('');
+	console.log(str);
+	var value = '';
+	var index = 0;
+	var re = /(\w)\1+/g;
+	str.replace(re,function(str1,str2){
+		console.log(str1.length,str2)
+		if( index < str1.length ){
+			index = str1.length;
+			value = str2;
+		}
+	})
+	
+	console.log("字符最多的" + value + "重复了" + index);
+
+
+
+	
+	
+
+</script>
+</html>

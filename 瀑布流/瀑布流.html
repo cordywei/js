@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+<script>
+	window.onload = function(){
+
+		var oUl = document.getElementById("ul1");
+		var aLi = oUl.getElementByTagName("li");
+		var iLen = aLi.length;
+		var b = true;    //门 
+
+
+
+		/*getShort函数用于获取四列li中哪列长度最短，从而把后面的数据添加到最短的一列中*/
+		function getShort(){    
+			var index = 0;
+			var  ih = aLi[index].offsetHeight;
+			for(var i = 1; i < iLen; i++){
+
+				if( aLi[i].offsetHeight < ih ){
+					index = i;
+					ih = aLi[i].offsetHeight;
+				}
+
+			}
+
+			return index;
+		};
+
+
+		function getTop(obj){
+			var iTop = 0;
+			while(obj){
+				iTop += obj.offsetTop;
+				obj = obj.offsetParent;
+			}
+			return iTop;
+		}
+
+
+		window.onscroll = function(){
+			var _index = getShort();
+			var oLi = aLi[_index];
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			if( getTop( oLi ) + oLi.offsetHeight < document.documentElement.clientHeight + scrollTop ){
+
+				if( b ){
+					b = false;
+					iPage++;
+					getList();
+				}
+
+			}
+		}
+
+	}
+</script>
+</html>
